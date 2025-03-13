@@ -4,6 +4,7 @@ Hello world.  I live inside supervisord, inside a docker container.
 
 import logging
 import sys
+import time
 
 log = logging.getLogger(__file__)
 
@@ -15,9 +16,11 @@ def main():
         handlers=[logging.StreamHandler(sys.stdout)],  # Write logs to stdout
     )
 
-    print("Hello world, about to log.")
-    log.info("I am logging inside supervisord, inside docker.")
-    print("I have now logged.")
+    while True:
+        print("Hello world, about to log.")
+        log.info("I am logging inside supervisord, inside docker.")
+        print("I have now logged.")
+        time.sleep(5)
 
 
 if __name__ == "__main__":
