@@ -1,0 +1,5 @@
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# Run hello.py every minute
+* * * * * python3 /app/hello.py >> /proc/1/fd/1 2>> /proc/1/fd/2
