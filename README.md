@@ -36,3 +36,25 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(sys.stdout)],  # Write logs to stdout
 )
 ```
+
+
+### Adjustments to use cron
+
+
+The Dockerfile has been modified to install cron, copy in the crontab file and load
+it into cron with the `crontab` command.  Also note that it creates the cron log files
+via `touch` to ensure they exist before cron is started.
+
+The crontab file "crontab_hello" runs the script once per minute:
+
+```crontab
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# Run hello.py every minute
+* * * * * python3 /app/hello.py >> /proc/1/fd/1 2>> /proc/1/fd/2
+```
+
+Note the `>> /proc/1/fd/1 2>> /proc/1/fd/2` redirects the cron output to the docker
+logs.
+
